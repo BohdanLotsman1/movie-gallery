@@ -1,0 +1,43 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import {
+  REGISTER_EMAIL,
+  REGISTER_NAME,
+  REGISTER_PASSWORD,
+} from "../libs/utilities/constants/sessionStorage";
+import { userSelector } from "../libs/utilities/store/selectors";
+import { useStyles } from "./styles";
+
+export const Header = () => {
+  const classes = useStyles();
+  const location = useLocation();
+  const user = useSelector(userSelector);
+
+  const isRegisterStarted =
+    (sessionStorage.getItem(REGISTER_NAME) ||
+      sessionStorage.getItem(REGISTER_EMAIL) ||
+      sessionStorage.getItem(REGISTER_PASSWORD)) &&
+    location.pathname !== "/register";
+
+  console.log(location.pathname, isRegisterStarted);
+
+  return (
+    <div className={classes.header}>
+      <Link to={"/"} className={classes.link}>
+        Browse
+      </Link>
+      <div className={classes.authContainer}>
+        <Link to={"/login"} className={classes.link}>
+          Sign in
+        </Link>
+        <Link to={"/register"} className={classes.link}>
+          {isRegisterStarted ? "Resume sign up" : "Sign up"}
+        </Link>
+        {user.email && (
+          <div className={classes.welcome}>Welcome <span className={classes.userName}>{user.name}</span>!</div>
+        )}
+      </div>
+    </div>
+  );
+};

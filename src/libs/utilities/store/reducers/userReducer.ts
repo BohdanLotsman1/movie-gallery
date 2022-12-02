@@ -1,5 +1,5 @@
-import { IS_LOGGED, REGISTRED_USER } from "../../constants/sessionStorage";
-import { GET_USER, LOGIN } from "../actionTypes/actionTypes";
+import { IS_AUTHORIZED, REGISTRED_USER } from "../../constants/sessionStorage";
+import { GET_USER, LOGIN, LOGOUT } from "../actionTypes/actionTypes";
 import { Actions, UserInitialState } from "../types";
 
 const initialState = {
@@ -14,7 +14,7 @@ const userReducer = (
   switch (type) {
     case LOGIN: {
       window.location.pathname = "/";
-      sessionStorage.setItem(IS_LOGGED, "1");
+      sessionStorage.setItem(IS_AUTHORIZED, "1");
       return {
         ...state,
         name: payload.name,
@@ -27,6 +27,15 @@ const userReducer = (
         ...state,
         name: user.name,
         email: user.email,
+      };
+    }
+    case LOGOUT: {
+      window.location.pathname = "/login";
+      sessionStorage.removeItem(IS_AUTHORIZED);
+      return {
+        ...state,
+        name: "",
+        email: "",
       };
     }
     default:

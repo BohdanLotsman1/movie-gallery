@@ -40,15 +40,24 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     fontSize: 25,
     color: "white",
+    marginLeft: '1ch',
     [theme.breakpoints.down(600)]: {
       fontSize: 15,
     }
   },
   userName: {
     display: 'inline-block',
-    width: 250,
+    maxWidth: 250,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    marginLeft: '1ch'
+    marginLeft: '1ch',
+  },
+  btn: {
+    border: '1px solid white',
+    fontFamily: "New Rocker",
+    color: 'white',
+    "&:hover": {
+      background: "#616161",
+    },
   },
 }));

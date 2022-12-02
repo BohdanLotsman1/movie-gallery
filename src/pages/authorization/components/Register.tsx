@@ -8,7 +8,7 @@ import { RegisterFormValues } from "../types";
 import { FormInput } from "../common/FormInput";
 import { registerValidationSchema } from "../../../libs/utilities/validation/validations";
 import {
-  IS_LOGGED,
+  IS_AUTHORIZED,
   REGISTER_EMAIL,
   REGISTER_NAME,
   REGISTER_PASSWORD,
@@ -27,7 +27,7 @@ export const Register = () => {
   const handleSubmit = (values: RegisterFormValues) => {
     Object.keys(values).map((key) => sessionStorage.removeItem(key));
     sessionStorage.setItem(REGISTRED_USER, JSON.stringify(values));
-    sessionStorage.removeItem(IS_LOGGED);
+    sessionStorage.removeItem(IS_AUTHORIZED);
     window.location.pathname = "/login";
   };
 

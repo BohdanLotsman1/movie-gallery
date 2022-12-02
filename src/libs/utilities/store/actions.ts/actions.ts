@@ -1,9 +1,13 @@
-import { LOGIN, GET_MOVIES, GET_USER } from "../actionTypes/actionTypes";
+import { LOGIN, GET_MOVIES, GET_USER, LOGOUT } from "../actionTypes/actionTypes";
 import { User } from "../types";
 
 export const login = (user: User) => ({
   type: LOGIN,
   payload: user,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
 });
 
 export const getUser = () => ({
